@@ -7,9 +7,14 @@ import config
 bot = commands.Bot(command_prefix='!')
 bot.remove_command("help")
 
+
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
+    #await channel.send("hello")
+    channel = bot.get_channel(853131344581099523)
+    print(channel)
+    await channel.send("lul")
 
 @bot.event
 async def on_message(message):
