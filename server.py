@@ -7,6 +7,10 @@ SERVER = "127.0.0.1"
 PORT = 5050
 FORMAT = 'utf-8'
 
+class MessageType:
+    DISCONNECT = "DISCONNECT"
+    LETTER     = "LETTER"
+
 class Server:
 
     serversock = None
@@ -21,12 +25,14 @@ class Server:
         connected = True
         while connected:
 
-            msg = conn.recv(PACKETSIZE).decode(FORMAT)
+            packet = conn.recv(PACKETSIZE).decode(FORMAT)
 
-            if not msg:
+            if not packet:
                 continue
 
-            print(f"[{addr}] {msg}")
+            self.unpack_message(packet)
+
+            print(f"[{addr}] {packet}")
 
         conn.close()
         
@@ -40,6 +46,14 @@ class Server:
             thread = threading.Thread(target=self.handle_client, args=(conn,addr))
             thread.start()
             print(f"[ACTIVE CONNECTIONS] {threading.activeCount() -1}")
+
+    def unpack_message(self, packet):
+        msg_type, msg = packet.split('$', 1)
+
+        if (msg_type == MessageType.LETTER):
+            print(f"recieved letter {msg}")
+        else:
+            print("[ERROR] Invalid message received of type: {msg_type}")
 
 server = Server(SERVER, PORT)
 server.start_server()
