@@ -21,4 +21,4 @@ async def on_message(message):
         await message.channel.send(engToMorse(message.content))
 
     #if message.content.startswith('')
-client.run("ODUzMTMwODA0NTUzMDU2MjY2.YMQ5-g.8RNnNxU4vudRrfX8Dkr2nyAJQf8")
+client.run("TOKEN")
