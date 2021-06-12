@@ -43,7 +43,7 @@ morse = {
     "/":"-..-.",
     ":":"---...",
     ";":"-.-.-.",
-    "=":"=...=",
+    "=":"-...-",
     "+":".-.-.",
     "-":"-....-",
     "_":"..--.-",
@@ -54,6 +54,7 @@ key_list = list(morse.keys())
 val_list = list(morse.values())
 
 def engToMorse(message):
+    message.lower()
     line = message.split()
     newLine = ""
     for word in line:
@@ -74,4 +75,3 @@ def morseToEng(message):
             newWord += key_list[index]
         newLine += newWord + " "
     return newLine
-

@@ -1,4 +1,5 @@
 import discord
+import re
 from translate import *
 
 client = discord.Client()
@@ -13,12 +14,12 @@ async def on_message(message):
         return
 
     if message.content.startswith('!help'):
-        await message.channel.send('`"!m->" will turn a message from morse code to english \n "!->m" will turn a message from english to morse code`')
-
-    if message.content.startswith('.' or '-'):
-        await message.channel.send(morseToEng(message.content))
+        await message.channel.send('just type lul')
     else:
-        await message.channel.send(engToMorse(message.content))
+        if re.search('[a-z0-9_]', message.content):
+            await message.channel.send(engToMorse(message.content))
+        else:
+            await message.channel.send(morseToEng(message.content))
 
     #if message.content.startswith('')
 client.run("TOKEN")
