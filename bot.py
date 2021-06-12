@@ -16,7 +16,7 @@ async def on_message(message):
         await message.channel.send('`"!m->" will turn a message from morse code to english \n "!->m" will turn a message from english to morse code`')
 
     if message.content.startswith('.' or '-'):
-        await message.channel.send(engToMorse(message.content))
+        await message.channel.send(morseToEng(message.content))
     else:
         await message.channel.send(engToMorse(message.content))
 
