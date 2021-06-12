@@ -65,11 +65,9 @@ def engToMorse(message):
 
 def morseToEng(message):
     line = message.split("   ")
-    print(line)
     newLine = ""
     for word in line:
         splitWord = word.split()
-        print(word)
         newWord = ""
         for letter in splitWord:
             index = val_list.index(letter)
