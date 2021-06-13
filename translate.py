@@ -71,6 +71,9 @@ def morseToEng(message):
         splitWord = word.split()
         newWord = ""
         for letter in splitWord:
+            if(letter not in val_list):
+                invalid = "invalid code"
+                return invalid
             index = val_list.index(letter)
             newWord += key_list[index]
         newLine += newWord + " "
