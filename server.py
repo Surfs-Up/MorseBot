@@ -1,8 +1,9 @@
 import socket
 import threading
+import asyncio
 
 PACKETSIZE = 64
-SERVER = "127.0.0.1"
+SERVER = "192.168.1.55"
 PORT = 5050
 FORMAT = 'utf-8'
 
@@ -14,9 +15,10 @@ class Server:
 
     serversock = None
 
-    def __init__(self):
+    def __init__(self, bot):
         self.serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.serversock.bind((SERVER,PORT))
+        self.bot = bot
 
     def handle_client(self, conn, addr):
         print(f"[NEW CONNECTION] {addr} connected.")
@@ -51,6 +53,7 @@ class Server:
 
         if (msg_type == MessageType.LETTER):
             print(f"recieved letter {msg}")
+            self.bot.send_letter(msg)
         else:
             print("[ERROR] Invalid message received of type: {msg_type}")
 
