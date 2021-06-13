@@ -2,7 +2,6 @@ import socket
 import threading
 
 PACKETSIZE = 64
-# SERVER = "192.168.1.55"
 SERVER = "127.0.0.1"
 PORT = 5050
 FORMAT = 'utf-8'
@@ -15,9 +14,9 @@ class Server:
 
     serversock = None
 
-    def __init__(self, server, port):
+    def __init__(self):
         self.serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.serversock.bind((server,port))
+        self.serversock.bind((SERVER,PORT))
 
     def handle_client(self, conn, addr):
         print(f"[NEW CONNECTION] {addr} connected.")
@@ -35,7 +34,7 @@ class Server:
             print(f"[{addr}] {packet}")
 
         conn.close()
-        
+
     def start_server(self):
         print("[STARTING] server is starting...")
         self.serversock.listen()
@@ -54,7 +53,4 @@ class Server:
             print(f"recieved letter {msg}")
         else:
             print("[ERROR] Invalid message received of type: {msg_type}")
-
-server = Server(SERVER, PORT)
-server.start_server()
 
