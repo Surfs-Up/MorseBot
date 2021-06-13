@@ -1,20 +1,20 @@
 
 import asyncio
 import time
-import threading
 
 from bot import MorseBot
 from server import Server
 import config
 
-bot = MorseBot()
+IP = "localhost"
+PORT = 5050
 
-def start_server():
-    server = Server(bot)
-    server.start_server()
+loop = asyncio.get_event_loop()
 
-threading.Thread(target=start_server).start()
+morse_server = Server(IP, PORT)
+morse_bot = MorseBot()
 
-bot = MorseBot()
-bot.run(config.TOKEN)
+asyncio.ensure_future(morse_server.server)
+asyncio.ensure_future(morse_bot.run(config.TOKEN))
+loop.run_forever()
 
